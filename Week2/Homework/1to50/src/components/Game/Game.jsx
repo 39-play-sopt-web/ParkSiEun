@@ -6,7 +6,7 @@ const SIZE = 3;
 const half = SIZE * SIZE;
 const total = SIZE * SIZE * 2;
 
-const Game = () => {
+const Game = ({ onStart, onFinish }) => {
     const [boardNumbers, setBoardNumbers] = useState(() => shuffle(range(1, half))); //판에 보이는 숫자들
     const [waitingNumbers, setWaitingNumbers] = useState(() => shuffle(range(half+1, total))); //대기 중인 숫자들
     const [nextNumber, setNextNumber] = useState(1); //다음에 눌러야 할 숫자
@@ -24,6 +24,9 @@ const Game = () => {
         setBoardNumbers(newBoard);
         setWaitingNumbers(restNumbers);
         setNextNumber(nextNumber + 1);
+
+        if (num === 1) onStart();
+        if (num === total) onFinish();
     }
 
     const isDone = nextNumber > total;

@@ -1,6 +1,6 @@
 import { Wrapper, TabButton, Right, Timer } from './Header.styles';
 
-const Header = ({ tab, onTabChange }) => {
+const Header = ({ tab, onTabChange, time }) => {
     return (
         <Wrapper>
             <h1>🔢 숫자 클릭 게임 👆</h1>
@@ -22,7 +22,7 @@ const Header = ({ tab, onTabChange }) => {
                             <option>Level 2 (4x4)</option>
                             <option>Level 3 (5x5)</option>
                         </select>
-                        <Timer>0.00초</Timer>
+                        <Timer>{time.toFixed(2)}초</Timer>
                     </>
                 )}
             </Right>
