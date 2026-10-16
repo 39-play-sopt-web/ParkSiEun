@@ -31,7 +31,7 @@ function App() {
   // 게임 종료 -> 기록 저장 후 결과 모달 열기
   const handleFinish = () => {
     const finalTime = stop();
-    saveRecord({ level: level, time: finalTime, playedAt: Date.now() });
+    saveRecord({ level, time: finalTime, playedAt: Date.now() });
     setResult({ level, time: finalTime });
   };
 
@@ -43,16 +43,32 @@ function App() {
 
   return (
     <>
-    <Header tab={tab}
-    onTabChange={handleTabChange}
-    time={time}
-    level={level}
-    onLevelChange={handleLevelChange}
-    />
-    <main>
-      {tab === 'game' ? <Game key={gameKey} level={level} onStart={start} onFinish={handleFinish} /> : <Ranking />}
-    </main>
-    {result && <ResultModal level={result.level} time={result.time} onClose={handleCloseModal} />}
+      <Header
+        tab={tab}
+        onTabChange={handleTabChange}
+        time={time}
+        level={level}
+        onLevelChange={handleLevelChange}
+      />
+      <main>
+        {tab === 'game' ? (
+          <Game
+            key={gameKey}
+            level={level}
+            onStart={start}
+            onFinish={handleFinish}
+          />
+        ) : (
+          <Ranking />
+        )}
+      </main>
+      {result && (
+        <ResultModal
+          level={result.level}
+          time={result.time}
+          onClose={handleCloseModal}
+        />
+      )}
     </>
   );
 }
