@@ -5,12 +5,11 @@ import Ranking from './components/Ranking/Ranking';
 import { useTimer } from './hooks/useTimer';
 import { saveRecord } from './utils/storage';
 
-const LEVEL = 1;
-
 function App() {
   const [tab, setTab] = useState('game');
   const { time, start, stop, reset } = useTimer(); // 커스텀 훅 사용
   const [gameKey, setGameKey] = useState(0);
+  const [level, setLevel] = useState(1);
 
   const handleTabChange = (nextTab) => {
     setTab(nextTab);
@@ -22,18 +21,28 @@ function App() {
     setGameKey((prev) => prev + 1);
   };
 
+  const handleLevelChange = (nextLevel) => {
+    setLevel(nextLevel);
+    restart();
+  }
+
   const handleFinish = () => {
     const finalTime = stop();
-    saveRecord({ level: LEVEL, time: finalTime, playedAt: Date.now() });
+    saveRecord({ level: level, time: finalTime, playedAt: Date.now() });
     alert(`클리어! ${finalTime.toFixed(2)}초 걸렸어요!`);
     restart();
   }
 
   return (
     <>
-    <Header tab={tab} onTabChange={handleTabChange} time={time} />
+    <Header tab={tab}
+    onTabChange={handleTabChange}
+    time={time}
+    level={level}
+    onLevelChange={handleLevelChange}
+    />
     <main>
-      {tab === 'game' ? <Game key={gameKey} onStart={start} onFinish={handleFinish} /> : <Ranking />}
+      {tab === 'game' ? <Game key={gameKey} level={level} onStart={start} onFinish={handleFinish} /> : <Ranking />}
     </main>
     </>
   );

@@ -19,7 +19,7 @@ color: #111;
 
 export const Grid = styled.div`
 display: grid;
-grid-template-columns: repeat(3, 80px);
+grid-template-columns: repeat(${({ $size }) => $size}, 80px);
 gap: 8px;
 `;
 
