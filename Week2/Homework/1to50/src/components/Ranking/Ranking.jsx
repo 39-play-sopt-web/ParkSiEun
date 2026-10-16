@@ -4,7 +4,7 @@ import { Wrapper, TitleRow, ClearButton, EmptyText, Table } from './Ranking.styl
 
 const Ranking = () => {
     const [records, setRecords] = useState(getRecords);
-    const sortedRecords = [...records].sort((a, b) => a.time - b.time);
+    const sortedRecords = [...records].sort((a, b) => b.level - a.level || a.time - b.time);
 
     const handleClear = () => {
         clearRecords();
