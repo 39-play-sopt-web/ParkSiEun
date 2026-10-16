@@ -10,3 +10,8 @@ export const getRecords = () => {
 export const saveRecord = (record) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify([...getRecords(), record]));
 };
+
+// 저장된 기록 전체 삭제 (랭킹 초기화)
+export const clearRecords = () => {
+    return localStorage.removeItem(STORAGE_KEY);
+}
