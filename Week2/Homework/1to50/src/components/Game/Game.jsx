@@ -15,9 +15,22 @@ const Game = ({ level, onStart, onFinish }) => {
     const [waitingNumbers, setWaitingNumbers] = useState(() => shuffle(range(half+1, total))); //대기 중인 숫자들
     const [nextNumber, setNextNumber] = useState(1); //다음에 눌러야 할 숫자
 
+    const [flashIndex, setFlashIndex] = useState(null);
+    const [wrongIndex, setWrongIndex] = useState(null);
+
     const handleClick = (index) => {
         const num = boardNumbers[index];
-        if (num !== nextNumber) return; // 순서가 아닌 숫자는 무시
+
+        // 틀린 숫자는 흔들리는 효과를 줌
+        if (num !== nextNumber) {
+            setWrongIndex(index);
+            setTimeout(() => setWrongIndex(null), 300);
+            return;
+        }
+
+        // 맞는 숫자에는 번쩍이는 효과를 줌
+        setFlashIndex(index);
+        setTimeout(() => setFlashIndex(null), 300);
 
         const [newNumber, ...restNumbers] = waitingNumbers;
 
@@ -47,6 +60,8 @@ const Game = ({ level, onStart, onFinish }) => {
                     key={index}
                     onClick={() => handleClick(index)}
                     disabled={num === null}
+                    $flash={flashIndex === index}
+                    $wrong={wrongIndex === index}
                 >
                     {num}
                 </NumberButton>

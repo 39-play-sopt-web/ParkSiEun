@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { keyframes, css } from '@emotion/react';
 
 export const Wrapper = styled.section`
 display: flex;
@@ -23,6 +24,18 @@ grid-template-columns: repeat(${({ $size }) => $size}, 80px);
 gap: 8px;
 `;
 
+const pop = keyframes`
+0% { transform: scale(1); background: #5fe0c8; }
+50% { transform: scale(0.9); }
+100% { transform: scale(1); }
+`;
+
+const shake = keyframes`
+0%, 100% { transform: translateX(0); }
+25% { transform: translateX(-4px); }
+75% { transform: translateX(4px); }
+`;
+
 export const NumberButton = styled.button`
 width: 80px;
 height: 80px;
@@ -30,6 +43,8 @@ border-radius: 10px;
 background: white;
 font-size: 22px;
 font-weight: 700;
+${({ $flash }) => $flash && css`animation: ${pop} 0.3s;`}
+${({ $wrong }) => $wrong && css`animation: ${shake} 0.3s;`}
 
 &:hover:not(:disabled) {
 background: #5fe0c8;
