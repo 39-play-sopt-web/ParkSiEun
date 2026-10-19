@@ -1,0 +1,86 @@
+/* == 관심사 == */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* 반응형 구현 */
+@media (max-width: 1200px) {
+  .card-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 960px) {
+  .card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 720px) {
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.card {
+  background-color: var(--color-card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 14px;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+
+.card img {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* 썸네일 크기 통일 */
+  object-fit: cover; /* 이미지 찌그러지지 않게 */
+  display: block;
+}
+
+.card h3 {
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+/* 버튼 2개 (좋아요/싫어요) */
+.card-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.card-buttons button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  color: #ffffff;
+  font-size: 12px;
+  transition: background-color 0.3s;
+}
+
+.like-btn {
+  background-color: #9cc3ea;
+}
+.dislike-btn {
+  background-color: #eea0a0;
+}
+
+/* 심화: 좋아요/싫어요 hover 시 자연스러운 컬러 변경 */
+.like-btn:hover {
+  background-color: #4a90e2;
+}
+.dislike-btn:hover {
+  background-color: #e05555;
+}
+
+/* 심화: 카드 hover 시 상승/그림자 애니메이션 */
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}

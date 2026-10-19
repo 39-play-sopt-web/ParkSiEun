@@ -1,0 +1,37 @@
+/* == 네비게이션(사이드 목차) == */
+.side-nav {
+  position: sticky;
+  top: calc(var(--header-height) + 20px);
+  align-self: start;
+  margin-left: 16px;
+}
+
+.side-nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.side-nav a {
+  display: block;
+  padding: 16px;
+  background-color: var(--color-nav-bg);
+  color: var(--color-text);
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+/* hover 시 색상 변경 */
+.side-nav a:hover {
+  background-color: var(--color-nav-hover);
+}
+
+/* 심화: 맨 위/맨 아래 모서리만 둥글게 */
+.side-nav li:first-child a {
+  border-radius: 16px 16px 0 0;
+}
+
+.side-nav li:last-child a {
+  border-radius: 0 0 16px 16px;
+}

@@ -1,0 +1,47 @@
+/* == 좋아하는 것 == */
+
+/* 배너 영역: 넘치는 사진은 숨김 */
+.banner {
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+/* hover/포커스: 그 자리에서 일시정지 */
+.banner:is(:hover, :focus-within) .banner-track {
+  animation-play-state: paused;
+}
+
+/* 심화: 끊김 없는 무한 루프 배너 */
+.banner-track {
+  display: flex;
+  width: max-content;
+  animation: loop 20s linear infinite;
+}
+
+.banner-track img {
+  flex-shrink: 0;
+  width: 240px;
+  height: 180px;
+  object-fit: cover; /* 찌그러짐 방지 */
+  border-radius: 12px;
+  margin-right: 12px;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+
+/* 마우스 올린 사진 강조 */
+.banner-track img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* 무한 루프 */
+@keyframes loop {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
