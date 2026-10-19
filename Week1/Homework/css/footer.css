@@ -1,0 +1,9 @@
+/* == 푸터 == */
+.footer {
+  grid-column: 1 / -1;
+  background-color: var(--color-footer-bg);
+  color: var(--color-footer-text);
+  text-align: center;
+  padding: 16px;
+  margin-top: 40px;
+}

@@ -1,0 +1,62 @@
+/* == 좋아하는 것 == */
+
+/* 평소: 자동 루프만 (스크롤·스냅 끔) */
+.banner {
+  overflow: clip;
+  padding: 10px 0;
+  scroll-snap-type: none;
+  scrollbar-width: none;
+}
+
+.banner::-webkit-scrollbar {
+  display: none;
+}
+
+/* hover/포커스: 수동 스크롤 + 스냅 켬 */
+.banner:is(:hover, :focus-within) {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+}
+
+/* hover/포커스: 자동 루프 끔 */
+.banner:is(:hover, :focus-within) .banner-track {
+  animation: none;
+  transform: none;
+}
+
+/* 심화: 끊김 없는 무한 루프 배너 */
+.banner-track {
+  display: flex;
+  width: max-content;
+  animation: loop 20s linear infinite;
+}
+
+.banner-track img {
+  flex-shrink: 0;
+  width: 240px;
+  height: 180px;
+  object-fit: cover; /* 찌그러짐 방지 */
+  border-radius: 12px;
+  margin-right: 12px;
+  scroll-snap-align: start;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+
+/* 마우스 올린 사진 강조 */
+.banner-track img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* 무한 루프 */
+@keyframes loop {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
