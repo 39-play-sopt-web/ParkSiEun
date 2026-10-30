@@ -3,21 +3,29 @@ import styled from '@emotion/styled';
 import { getMovies } from '../apis/movie';
 import type { Movie } from '../types/movie';
 import MovieCard from '../components/MovieCard';
+import RatingFilter, { RATING_OPTIONS } from '../components/RatingFilter';
+import type { RatingOption } from '../components/RatingFilter';
 
 const MovieListPage = () => {
     const [movies, setMovies] = useState<Movie[]>([]);
+    const [selectedRating, setSelectedRating] = useState<RatingOption>(RATING_OPTIONS[0]);
 
     useEffect(() => {
         const fetchMovies = async () => {
-            const data = await getMovies({page: 1});
+            const data = await getMovies({
+                page: 1,
+                minRating: selectedRating.min,
+                maxRating: selectedRating.max,
+            });
             setMovies(data.results);
         };
         fetchMovies();
-    }, []);
+    }, [selectedRating]);
 
     return (
     <Container>
       <Heading>🍿영화 둘러보기</Heading>
+      <RatingFilter selected={selectedRating} onSelect={setSelectedRating} />
       <Grid>
         {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
