@@ -1,10 +1,10 @@
-import { createBrowserRouter } from "react-router-dom";
-import Layout from "./components/Layout";
-import MovieListPage from "./pages/MovieListPage";
-import MovieDetailPage from "./pages/MovieDetailPage";
+import { createBrowserRouter } from 'react-router-dom';
+import Layout from './components/Layout';
+import MovieListPage from './pages/MovieListPage';
+import MovieDetailPage from './pages/MovieDetailPage';
 
 const router = createBrowserRouter([
-    {
+  {
     path: '/',
     Component: Layout,
     children: [

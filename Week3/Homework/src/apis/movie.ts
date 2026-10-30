@@ -8,7 +8,11 @@ interface GetMoviesParams {
 }
 
 // 영화 목록 조회
-export const getMovies = async ({ page, minRating, maxRating }: GetMoviesParams) => {
+export const getMovies = async ({
+  page,
+  minRating,
+  maxRating,
+}: GetMoviesParams) => {
   const res = await apiClient.get<MovieListResponse>('/discover/movie', {
     params: {
       page,

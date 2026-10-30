@@ -10,7 +10,8 @@ interface MovieCardProps {
 }
 
 const MovieCard = ({ movie }: MovieCardProps) => {
-  const { id, title, poster_path, release_date, overview, vote_average } = movie;
+  const { id, title, poster_path, release_date, overview, vote_average } =
+    movie;
 
   return (
     <Card to={`/movie/${id}`}>
@@ -23,8 +24,8 @@ const MovieCard = ({ movie }: MovieCardProps) => {
       </PosterWrapper>
       <Info>
         <TitleRow>
-            <Title>{title}</Title>
-            <Rating>★ {vote_average.toFixed(1)}</Rating>
+          <Title>{title}</Title>
+          <Rating>★ {vote_average.toFixed(1)}</Rating>
         </TitleRow>
         <ReleaseDate>{formatDate(release_date)}</ReleaseDate>
         <Overview>{overview || '줄거리 정보가 없습니다.'}</Overview>
@@ -41,7 +42,9 @@ const Card = styled(Link)`
   border-radius: 12px;
   border: 1px solid transparent;
   background-color: ${({ theme }) => theme.colors.surface};
-  transition: transform 0.2s, border-color 0.2s;
+  transition:
+    transform 0.2s,
+    border-color 0.2s;
 
   &:hover {
     transform: translateY(-6px);
@@ -89,7 +92,7 @@ const TitleRow = styled.div`
 `;
 
 const Title = styled.h3`
-  min-width: 0;  
+  min-width: 0;
   font-size: 0.95rem;
   white-space: nowrap;
   overflow: hidden;

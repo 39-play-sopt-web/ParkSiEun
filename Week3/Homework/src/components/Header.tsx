@@ -1,13 +1,13 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 const Header = () => {
-    return (
-        <Wrapper>
-            <Logo>
-            PLAY SOPT <Highlight>MOVIE</Highlight>
-            </Logo>
-        </Wrapper>
-    );
+  return (
+    <Wrapper>
+      <Logo>
+        PLAY SOPT <Highlight>MOVIE</Highlight>
+      </Logo>
+    </Wrapper>
+  );
 };
 
 export default Header;

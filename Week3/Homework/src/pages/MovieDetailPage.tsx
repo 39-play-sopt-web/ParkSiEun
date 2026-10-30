@@ -1,10 +1,14 @@
-import { useParams, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import styled from "@emotion/styled";
-import { getMovieDetail } from "../apis/movie";
-import type { MovieDetail } from "../types/movie";
-import { formatDate, formatRuntime, formatMoney, formatLanguage } from "../utils/format";
-
+import { useParams, Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import styled from '@emotion/styled';
+import { getMovieDetail } from '../apis/movie';
+import type { MovieDetail } from '../types/movie';
+import {
+  formatDate,
+  formatRuntime,
+  formatMoney,
+  formatLanguage,
+} from '../utils/format';
 
 const POSTER_URL = 'https://image.tmdb.org/t/p/w500';
 const BACKDROP_URL = 'https://image.tmdb.org/t/p/w1280';
@@ -34,11 +38,15 @@ const MovieDetailPage = () => {
     { label: '원어', value: formatLanguage(movie.original_language) },
     {
       label: '제작 국가',
-      value: movie.production_countries.map((country) => country.name).join(', ') || '정보 없음',
+      value:
+        movie.production_countries.map((country) => country.name).join(', ') ||
+        '정보 없음',
     },
     {
       label: '사용 언어',
-      value: movie.spoken_languages.map((lang) => lang.english_name).join(', ') || '정보 없음',
+      value:
+        movie.spoken_languages.map((lang) => lang.english_name).join(', ') ||
+        '정보 없음',
     },
     { label: '예산', value: formatMoney(movie.budget) },
     { label: '수익', value: formatMoney(movie.revenue) },
@@ -49,7 +57,9 @@ const MovieDetailPage = () => {
       <BackLink to="/">← 영화 목록으로 돌아가기</BackLink>
 
       <Banner
-        backdropUrl={movie.backdrop_path ? `${BACKDROP_URL}${movie.backdrop_path}` : null}
+        backdropUrl={
+          movie.backdrop_path ? `${BACKDROP_URL}${movie.backdrop_path}` : null
+        }
       >
         {movie.poster_path && (
           <Poster src={`${POSTER_URL}${movie.poster_path}`} alt={movie.title} />
