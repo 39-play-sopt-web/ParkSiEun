@@ -1,21 +1,13 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import type { Movie } from '../types/movie';
+import { formatDate } from '../utils/format';
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
 interface MovieCardProps {
   movie: Movie;
 }
-
-const formatDate = (date: string) => {
-  if (!date) return '개봉일 미정';
-  return new Date(date).toLocaleDateString('ko-KR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-};
 
 const MovieCard = ({ movie }: MovieCardProps) => {
   const { id, title, poster_path, release_date, overview, vote_average } = movie;
