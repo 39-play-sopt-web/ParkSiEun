@@ -96,7 +96,7 @@ export default MovieDetailPage;
 const Loading = styled.p`
   padding: 80px 0;
   text-align: center;
-  color: ${({ theme }) => theme.colors.gray};
+  color: ${({ theme }) => theme.colors.subtext};
 `;
 
 const Container = styled.main`
@@ -109,10 +109,10 @@ const BackLink = styled(Link)`
   display: inline-block;
   margin-bottom: 20px;
   font-size: 0.9rem;
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.text};
 
   &:hover {
-    text-decoration: underline;
+    color: ${({ theme }) => theme.colors.subtext};
   }
 `;
 
@@ -120,11 +120,12 @@ const Banner = styled.section<{ backdropUrl: string | null }>`
   display: flex;
   gap: 32px;
   padding: 32px;
-  border-radius: 16px;
+  border-radius: 20px;
+  border: 1px solid ${({ theme }) => theme.colors.border};
   background-color: ${({ theme }) => theme.colors.surface};
-  background-image: ${({ backdropUrl }) =>
+  background-image: ${({ backdropUrl, theme }) =>
     backdropUrl
-      ? `linear-gradient(to right, rgba(18, 18, 18, 0.95) 30%, rgba(18, 18, 18, 0.6)), url(${backdropUrl})`
+      ? `linear-gradient(to right, ${theme.colors.background}f7 40%, ${theme.colors.background}b3), url(${backdropUrl})`
       : 'none'};
   background-size: cover;
   background-position: center;
@@ -137,7 +138,7 @@ const Banner = styled.section<{ backdropUrl: string | null }>`
 const Poster = styled.img`
   width: 200px;
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 24px rgba(74, 58, 48, 0.15);
 `;
 
 const BannerInfo = styled.div`
@@ -156,7 +157,7 @@ const MetaRow = styled.div`
   align-items: center;
   gap: 12px;
   font-size: 0.85rem;
-  color: ${({ theme }) => theme.colors.gray};
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 const RatingBadge = styled.span`
@@ -170,7 +171,7 @@ const RatingBadge = styled.span`
 const StatusBadge = styled.span`
   padding: 2px 8px;
   border-radius: 6px;
-  border: 1px solid ${({ theme }) => theme.colors.gray};
+  border: 1px solid ${({ theme }) => theme.colors.subtext};
 `;
 
 const GenreList = styled.div`
@@ -183,7 +184,8 @@ const GenreChip = styled.span`
   padding: 4px 12px;
   border-radius: 999px;
   font-size: 0.8rem;
-  background-color: rgba(255, 255, 255, 0.1);
+  color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => `${theme.colors.primary}1f`};
 `;
 
 const Section = styled.section`
@@ -197,7 +199,7 @@ const SectionTitle = styled.h2`
 
 const Overview = styled.p`
   line-height: 1.7;
-  color: ${({ theme }) => theme.colors.gray};
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 const InfoGrid = styled.div`
@@ -215,7 +217,7 @@ const InfoBox = styled.div`
 const InfoLabel = styled.p`
   margin-bottom: 6px;
   font-size: 0.75rem;
-  color: ${({ theme }) => theme.colors.gray};
+  color: ${({ theme }) => theme.colors.subtext};
 `;
 
 const InfoValue = styled.p`

@@ -20,10 +20,12 @@ const MovieCard = ({ movie }: MovieCardProps) => {
         ) : (
           <NoPoster>No Image</NoPoster>
         )}
-        <Rating>★ {vote_average.toFixed(1)}</Rating>
       </PosterWrapper>
       <Info>
-        <Title>{title}</Title>
+        <TitleRow>
+            <Title>{title}</Title>
+            <Rating>★ {vote_average.toFixed(1)}</Rating>
+        </TitleRow>
         <ReleaseDate>{formatDate(release_date)}</ReleaseDate>
         <Overview>{overview || '줄거리 정보가 없습니다.'}</Overview>
       </Info>
@@ -43,12 +45,11 @@ const Card = styled(Link)`
 
   &:hover {
     transform: translateY(-6px);
-    border-color: ${({ theme }) => theme.colors.primary};
+    border-color: ${({ theme }) => theme.colors.subtext};
   }
 `;
 
 const PosterWrapper = styled.div`
-  position: relative;
   aspect-ratio: 2 / 3;
 `;
 
@@ -63,13 +64,11 @@ const NoPoster = styled.div`
   align-items: center;
   justify-content: center;
   height: 100%;
-  color: ${({ theme }) => theme.colors.gray};
+  color: ${({ theme }) => theme.colors.subtext};
 `;
 
 const Rating = styled.span`
-  position: absolute;
-  top: 8px;
-  left: 8px;
+  flex-shrink: 0;
   padding: 2px 8px;
   border-radius: 999px;
   font-size: 0.75rem;
@@ -82,7 +81,15 @@ const Info = styled.div`
   padding: 12px;
 `;
 
+const TitleRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+`;
+
 const Title = styled.h3`
+  min-width: 0;  
   font-size: 0.95rem;
   white-space: nowrap;
   overflow: hidden;
@@ -92,14 +99,14 @@ const Title = styled.h3`
 const ReleaseDate = styled.p`
   margin-top: 4px;
   font-size: 0.75rem;
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 const Overview = styled.p`
   margin-top: 8px;
   font-size: 0.75rem;
   line-height: 1.5;
-  color: ${({ theme }) => theme.colors.gray};
+  color: ${({ theme }) => theme.colors.text};
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;

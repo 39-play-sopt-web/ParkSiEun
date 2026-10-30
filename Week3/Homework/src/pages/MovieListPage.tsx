@@ -103,5 +103,5 @@ const Grid = styled.div`
 const Message = styled.p`
   padding: 24px 0;
   text-align: center;
-  color: ${({ theme }) => theme.colors.gray};
+  color: ${({ theme }) => theme.colors.subtext};
 `;

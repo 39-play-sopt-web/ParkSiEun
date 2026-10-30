@@ -1,10 +1,11 @@
 export const theme = {
     colors: {
-        background: '#121212',
-        surface: '#1e1e1e',
-        primary: '#7ee8d0',
-        white: '#ffffff',
-        gray: '#a0a0b0',
+        background: '#fff6ee',
+        surface: '#ffffff',
+        primary: '#a00a39',
+        text: '#4a3a30',
+        subtext: '#a08a7a',
+        border: '#f0e2d6'
     },
 };
 

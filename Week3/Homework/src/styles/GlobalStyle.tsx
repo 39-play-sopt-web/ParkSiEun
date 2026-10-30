@@ -15,7 +15,7 @@ const GlobalStyle = () => {
 
         body {
           background-color: ${theme.colors.background};
-          color: ${theme.colors.white};
+          color: ${theme.colors.text};
           font-family: -apple-system, sans-serif;
         }
 

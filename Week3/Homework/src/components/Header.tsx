@@ -17,9 +17,9 @@ const Wrapper = styled.header`
   top: 0;
   z-index: 10;
   padding: 16px 24px;
-  background: rgba(18, 18, 18, 0.8);
+  background: ${({ theme }) => `${theme.colors.background}d9`};
   backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 const Logo = styled.h1`

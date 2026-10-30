@@ -51,7 +51,7 @@ const Chip = styled.button<{ isActive: boolean }>`
   font-size: 0.8rem;
   font-weight: 600;
   color: ${({ theme, isActive }) =>
-    isActive ? theme.colors.background : theme.colors.gray};
+    isActive ? theme.colors.background : theme.colors.subtext};
   background-color: ${({ theme, isActive }) =>
     isActive ? theme.colors.primary : theme.colors.surface};
   transition: background-color 0.2s;
