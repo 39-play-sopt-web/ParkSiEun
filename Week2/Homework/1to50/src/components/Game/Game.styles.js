@@ -6,7 +6,7 @@ export const Wrapper = styled.section`
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  padding-top: 48px;
+  padding: 48px 16px 0;
 `;
 
 export const NextNumberText = styled.p`
@@ -20,8 +20,10 @@ export const NextNumberText = styled.p`
 
 export const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(${({ $size }) => $size}, 80px);
+  grid-template-columns: repeat(${({ $size }) => $size}, minmax(0, 1fr));
   gap: 8px;
+  width: 100%;
+  max-width: ${({ $size }) => $size * 80 + ($size - 1) * 8}px;
 `;
 
 const pop = keyframes`
@@ -37,8 +39,8 @@ const shake = keyframes`
 `;
 
 export const NumberButton = styled.button`
-  width: 80px;
-  height: 80px;
+  width: 100%;
+  aspect-ratio: 1;
   border-radius: 10px;
   background: white;
   font-size: 22px;

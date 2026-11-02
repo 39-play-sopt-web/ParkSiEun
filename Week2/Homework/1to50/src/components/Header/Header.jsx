@@ -21,6 +21,7 @@ const Header = ({ tab, onTabChange, time, level, onLevelChange }) => {
         {tab === 'game' && (
           <>
             <select
+              aria-label="레벨 선택"
               value={level}
               onChange={(e) => onLevelChange(Number(e.target.value))}
             >

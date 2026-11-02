@@ -14,6 +14,7 @@ function App() {
   const [result, setResult] = useState(null);
 
   const handleTabChange = (nextTab) => {
+    if (tab === nextTab) return;
     setTab(nextTab);
     reset();
   };

@@ -1,12 +1,18 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 export const useTimer = () => {
   const [time, setTime] = useState(0);
   const startTimeRef = useRef(0);
   const intervalRef = useRef(null);
 
+  // 컴포넌트가 사라질 때 타이머 정리
+  useEffect(() => {
+    return () => clearInterval(intervalRef.current);
+  }, []);
+
   // 시작 시각과의 차이로 걸린 시간 계산 (0.01초마다 갱신)
   const start = () => {
+    if (intervalRef.current) return;
     startTimeRef.current = Date.now();
     intervalRef.current = setInterval(
       () => setTime((Date.now() - startTimeRef.current) / 1000),
@@ -17,6 +23,7 @@ export const useTimer = () => {
   // 멈추고 최종 시간 돌려주기
   const stop = () => {
     clearInterval(intervalRef.current);
+    intervalRef.current = null;
     const finalTime = (Date.now() - startTimeRef.current) / 1000;
     setTime(finalTime);
     return finalTime;
@@ -24,6 +31,7 @@ export const useTimer = () => {
 
   const reset = () => {
     clearInterval(intervalRef.current);
+    intervalRef.current = null;
     setTime(0);
   };
 

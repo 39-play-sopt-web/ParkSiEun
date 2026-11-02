@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { range, shuffle } from '../../utils/mixNumbers';
 import { Wrapper, NextNumberText, Grid, NumberButton } from './Game.styles';
 
@@ -10,6 +10,9 @@ const Game = ({ level, onStart, onFinish }) => {
 
   const half = size * size;
   const total = size * size * 2;
+
+  const flashTimerRef = useRef(null);
+  const wrongTimerRef = useRef(null);
 
   const [boardNumbers, setBoardNumbers] = useState(() =>
     shuffle(range(1, half)),
@@ -27,14 +30,16 @@ const Game = ({ level, onStart, onFinish }) => {
 
     // 틀린 숫자는 흔들리는 효과를 줌
     if (num !== nextNumber) {
+      clearTimeout(wrongTimerRef.current);
       setWrongIndex(index);
-      setTimeout(() => setWrongIndex(null), 300);
+      wrongTimerRef.current = setTimeout(() => setWrongIndex(null), 300);
       return;
     }
 
     // 맞는 숫자에는 번쩍이는 효과를 줌
+    clearTimeout(flashTimerRef.current); 
     setFlashIndex(index);
-    setTimeout(() => setFlashIndex(null), 300);
+    flashTimerRef.current = setTimeout(() => setFlashIndex(null), 300);
 
     const [newNumber, ...restNumbers] = waitingNumbers;
 
