@@ -17,3 +17,11 @@ export async function createPost(body: CreatePostRequest) {
 
   return response.data;
 }
+
+export async function getPostDetail(postId: number) {
+  const response = await api
+    .get(`posts/${postId}`)
+    .json<ApiResponse<Post>>();
+
+  return response.data;
+}
