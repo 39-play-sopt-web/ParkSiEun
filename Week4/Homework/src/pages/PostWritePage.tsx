@@ -4,12 +4,16 @@ import styled from '@emotion/styled';
 import { ROUTE_PATH } from '../router/path';
 import { useCreatePost } from '../hooks/usePosts';
 
+const CONTENT_MAX_LENGTH = 1000
+
 function PostWritePage() {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [author, setAuthor] = useState('');
   const { mutate: submitPost, isPending } = useCreatePost();
+
+  const isEmpty = !title.trim() || !content.trim() || !author.trim();
 
   function handleSubmit() {
     submitPost(
@@ -59,6 +63,10 @@ function PostWritePage() {
             onChange={(event) => setContent(event.target.value)}
             placeholder="본문을 입력해주세요"
           />
+          <Counter>
+            {content.length} / {CONTENT_MAX_LENGTH}
+          </Counter>
+
         </Field>
 
         <Field>
@@ -74,9 +82,9 @@ function PostWritePage() {
 
         <Buttons>
           <SubButton type="button" onClick={handleGoToList}>
-            목록으로
+            ←목록으로
           </SubButton>
-          <SubmitButton type="submit" disabled={isPending}>
+          <SubmitButton type="submit" disabled={isEmpty || isPending}>
             {isPending ? '작성 중...' : '작성'}
           </SubmitButton>
         </Buttons>
@@ -179,4 +187,10 @@ const SubmitButton = styled.button`
     background: ${({ theme }) => theme.colors.disabled};
     color: ${({ theme }) => theme.colors.disabledText};
   }
+`;
+
+const Counter = styled.span`
+  align-self: flex-end;
+  font-size: 0.8rem;
+  color: ${({ theme }) => theme.colors.subtext};
 `;
