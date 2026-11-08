@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getPosts, createPost, getPostDetail } from "../apis/posts";
+import { getPosts, createPost, getPostDetail, updatePost } from "../apis/posts";
 import { QUERY_KEYS } from "../constants/queryKeys";
-import type { CreatePostRequest } from "../types/post";
+import type { CreatePostRequest, UpdatePostRequest } from "../types/post";
 
 export function usePostList(keyword: string) {
   return useQuery({
@@ -26,5 +26,16 @@ export function usePostDetail(postId: number) {
     queryKey: [...QUERY_KEYS.POST_DETAIL, postId],
     queryFn: () => getPostDetail(postId),
     enabled: Number.isInteger(postId) && postId > 0,
+  });
+}
+
+export function useUpdatePost(postId: number) {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (body: UpdatePostRequest) => updatePost(postId, body),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.POSTS });
+    },
   });
 }

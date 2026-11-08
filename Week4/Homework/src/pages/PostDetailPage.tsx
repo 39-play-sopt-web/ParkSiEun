@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams, generatePath } from 'react-router';
 import styled from '@emotion/styled';
 import { ROUTE_PATH } from '../router/path';
 import { usePostDetail } from '../hooks/usePosts';
@@ -15,6 +15,10 @@ function PostDetailPage() {
     navigate(ROUTE_PATH.POST_LIST);
   }
 
+  function handleGoToEdit() {
+    navigate(generatePath(ROUTE_PATH.POST_EDIT, { postId: String(id) }));
+  }
+
   function renderPost() {
     if (!isValidId) {
       return <Message role="alert">잘못된 게시글 주소예요.</Message>;
@@ -25,6 +29,7 @@ function PostDetailPage() {
     }
 
     return (
+      <>
       <Article>
         <Title>{post.title}</Title>
         <Meta>
@@ -33,6 +38,13 @@ function PostDetailPage() {
         </Meta>
         <Content>{post.content}</Content>
       </Article>
+      
+      <Buttons>
+          <EditButton type="button" onClick={handleGoToEdit}>
+            수정
+          </EditButton>
+        </Buttons>
+      </>
     );
   }
 
@@ -102,4 +114,22 @@ const Message = styled.p`
   padding: 40px 0;
   color: ${({ theme }) => theme.colors.subtext};
   text-align: center;
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+`;
+
+const EditButton = styled.button`
+  padding: 10px 20px;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: 8px;
+  background: ${({ theme }) => theme.colors.surface};
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.primary};
+  }
 `;
