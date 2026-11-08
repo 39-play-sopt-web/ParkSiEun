@@ -9,8 +9,13 @@ import { useIssueCode } from "../hooks/useAuth";
 function AuthPage() {
   const navigate = useNavigate();
   const [selectedPart, setSelectedPart] = useState<Part | null>(null);
-  const { mutate: issueCode, isPending } = useIssueCode();
+  const { mutate: issueCode, isPending, isError, reset } = useIssueCode();
 
+  function handleSelectPart(part: Part) {
+    setSelectedPart(part);
+    reset();
+  }
+  
   function handleIssueCode() {
     if (!selectedPart) return;
     
@@ -35,16 +40,22 @@ function AuthPage() {
               key={option.value}
               type="button"
               aria-pressed={selectedPart === option.value}
-              onClick={() => setSelectedPart(option.value)}
+              onClick={() => handleSelectPart(option.value)}
             >
               {option.label}
             </PartButton>
           ))}
         </PartGroup>
 
-        <IssueButton type="button" onClick={handleIssueCode} disabled={isPending}>
+        <IssueButton type="button" onClick={handleIssueCode} disabled={!selectedPart || isPending}>
           {isPending ? '발급 중...' : '코드 발급'}
         </IssueButton>
+
+        {isError && (
+          <ErrorMessage role="alert">
+            코드 발급에 실패했어요. 잠시 후 다시 시도해주세요.
+            </ErrorMessage>
+          )}
 
         <ListButton type="button" onClick={handleGoToList}>
           게시판 목록 보러가기
@@ -133,4 +144,10 @@ const ListButton = styled.button`
   font-size: 0.85rem;
   color: ${({ theme }) => theme.colors.subtext};
   text-decoration: underline;
+`;
+
+const ErrorMessage = styled.p`
+  font-size: 0.85rem;
+  color: ${({ theme }) => theme.colors.error};
+  text-align: center;
 `;
