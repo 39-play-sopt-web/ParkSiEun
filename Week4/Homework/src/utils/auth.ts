@@ -4,7 +4,7 @@ const AUTHORIZATION_CODE_KEY = 'authorizationCode';
 const PART_KEY = 'part';
 
 function isPart(value: string | null): value is Part {
-  return value === 'WEB' || value === 'IOS' || value === 'ANDROID';
+  return value === 'WEB' || value === 'iOS' || value === 'ANDROID';
 }
 
 export function saveAuth(authorizationCode: string, part: Part) {

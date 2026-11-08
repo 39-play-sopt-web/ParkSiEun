@@ -1,4 +1,4 @@
-export type Part = 'WEB' | 'IOS' | 'ANDROID';
+export type Part = 'WEB' | 'iOS' | 'ANDROID';
 
 export interface AuthorizationCodeRequest {
   part: Part;
