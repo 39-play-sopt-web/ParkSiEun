@@ -21,14 +21,13 @@ function PostDetailPage() {
     navigate(generatePath(ROUTE_PATH.POST_EDIT, { postId: String(id) }));
   }
 
-
   function handleDelete() {
     if (!getAuthorizationCode()) {
       alert('회원 코드를 먼저 발급받아주세요.');
       navigate(ROUTE_PATH.AUTH);
       return;
     }
-    
+
     if (!confirm('정말 삭제할까요?')) return;
 
     removePost(id, {
@@ -53,20 +52,24 @@ function PostDetailPage() {
 
     return (
       <>
-      <Article>
-        <Title>{post.title}</Title>
-        <Meta>
-          <Author>{post.author}</Author>
-          <time dateTime={post.createdAt}>{formatDate(post.createdAt)}</time>
-        </Meta>
-        <Content>{post.content}</Content>
-      </Article>
-      
-      <Buttons>
+        <Article>
+          <Title>{post.title}</Title>
+          <Meta>
+            <Author>{post.author}</Author>
+            <time dateTime={post.createdAt}>{formatDate(post.createdAt)}</time>
+          </Meta>
+          <Content>{post.content}</Content>
+        </Article>
+
+        <Buttons>
           <EditButton type="button" onClick={handleGoToEdit}>
             수정
           </EditButton>
-          <DeleteButton type="button" onClick={handleDelete} disabled={isDeleting}>
+          <DeleteButton
+            type="button"
+            onClick={handleDelete}
+            disabled={isDeleting}
+          >
             {isDeleting ? '삭제 중...' : '삭제'}
           </DeleteButton>
         </Buttons>

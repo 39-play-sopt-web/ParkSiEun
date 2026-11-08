@@ -9,8 +9,6 @@ export interface Post {
 
 export interface GetPostsParams {
   keyword?: string;
-  cursor?: number;
-  size?: number;
 }
 
 export interface PostListResponse {

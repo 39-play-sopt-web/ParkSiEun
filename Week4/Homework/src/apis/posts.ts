@@ -1,6 +1,12 @@
-import { api } from "./instance";
-import type { ApiResponse } from "../types/api";
-import type { GetPostsParams, PostListResponse, CreatePostRequest, Post, UpdatePostRequest } from "../types/post";
+import { api } from './instance';
+import type { ApiResponse } from '../types/api';
+import type {
+  GetPostsParams,
+  PostListResponse,
+  CreatePostRequest,
+  Post,
+  UpdatePostRequest,
+} from '../types/post';
 
 export async function getPosts({ keyword }: GetPostsParams) {
   const response = await api
@@ -19,9 +25,7 @@ export async function createPost(body: CreatePostRequest) {
 }
 
 export async function getPostDetail(postId: number) {
-  const response = await api
-    .get(`posts/${postId}`)
-    .json<ApiResponse<Post>>();
+  const response = await api.get(`posts/${postId}`).json<ApiResponse<Post>>();
 
   return response.data;
 }

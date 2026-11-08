@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
-import styled from "@emotion/styled";
-import { ROUTE_PATH } from "../router/path";
-import { PART_OPTIONS } from "../constants/part";
-import type { Part } from "../types/auth";
-import { useIssueCode } from "../hooks/useAuth";
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import styled from '@emotion/styled';
+import { ROUTE_PATH } from '../router/path';
+import { PART_OPTIONS } from '../constants/part';
+import type { Part } from '../types/auth';
+import { useIssueCode } from '../hooks/useAuth';
 
 function AuthPage() {
   const navigate = useNavigate();
@@ -15,10 +15,10 @@ function AuthPage() {
     setSelectedPart(part);
     reset();
   }
-  
+
   function handleIssueCode() {
     if (!selectedPart) return;
-    
+
     issueCode(selectedPart, {
       onSuccess: () => navigate(ROUTE_PATH.POST_LIST),
     });
@@ -47,15 +47,19 @@ function AuthPage() {
           ))}
         </PartGroup>
 
-        <IssueButton type="button" onClick={handleIssueCode} disabled={!selectedPart || isPending}>
+        <IssueButton
+          type="button"
+          onClick={handleIssueCode}
+          disabled={!selectedPart || isPending}
+        >
           {isPending ? '발급 중...' : '코드 발급'}
         </IssueButton>
 
         {isError && (
           <ErrorMessage role="alert">
-            코드 발급에 실패했어요. 잠시 후 다시 시도해주세요.
-            </ErrorMessage>
-          )}
+            코드 발급에 실패했어요. 잠시 후 다시 시도해주세요.🙆‍♀️
+          </ErrorMessage>
+        )}
 
         <ListButton type="button" onClick={handleGoToList}>
           게시판 목록 보러가기

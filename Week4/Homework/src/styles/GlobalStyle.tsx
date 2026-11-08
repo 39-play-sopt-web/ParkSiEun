@@ -14,7 +14,7 @@ function GlobalStyle() {
         body {
           background: ${theme.colors.background};
           color: ${theme.colors.text};
-          font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', sans-serif;
+          font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         button {

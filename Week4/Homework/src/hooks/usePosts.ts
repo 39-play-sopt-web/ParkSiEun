@@ -1,7 +1,13 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { getPosts, createPost, getPostDetail, updatePost, deletePost } from "../apis/posts";
-import { QUERY_KEYS } from "../constants/queryKeys";
-import type { CreatePostRequest, UpdatePostRequest } from "../types/post";
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  getPosts,
+  createPost,
+  getPostDetail,
+  updatePost,
+  deletePost,
+} from '../apis/posts';
+import { QUERY_KEYS } from '../constants/queryKeys';
+import type { CreatePostRequest, UpdatePostRequest } from '../types/post';
 
 export function usePostList(keyword: string) {
   return useQuery({

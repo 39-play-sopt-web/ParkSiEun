@@ -25,7 +25,9 @@ function PostListPage() {
     }
     if (data.posts.length === 0) {
       return (
-        <Message>{keyword ? '검색 결과가 없어요.' : '게시글이 없어요.'}</Message>
+        <Message>
+          {keyword ? '검색 결과가 없어요.' : '게시글이 없어요.'}
+        </Message>
       );
     }
 

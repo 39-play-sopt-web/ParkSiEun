@@ -1,7 +1,7 @@
-import { NavLink, useNavigate } from "react-router";
-import styled from "@emotion/styled";
-import { ROUTE_PATH } from "../router/path";
-import { clearAuth, getPart } from "../utils/auth";
+import { NavLink, useNavigate } from 'react-router';
+import styled from '@emotion/styled';
+import { ROUTE_PATH } from '../router/path';
+import { clearAuth, getPart } from '../utils/auth';
 
 function Header() {
   const navigate = useNavigate();
