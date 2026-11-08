@@ -5,6 +5,7 @@ export const theme = {
     primary: '#a00a39',
     primaryHover: '#7d082d',
     text: '#4a3a30',
+    textOnPrimary: '#ffffff',
     subtext: '#a08a7a',
     border: '#f0e2d6',
     error: '#d9480f',
