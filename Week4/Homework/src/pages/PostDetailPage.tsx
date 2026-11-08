@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { ROUTE_PATH } from '../router/path';
 import { usePostDetail, useDeletePost } from '../hooks/usePosts';
 import { formatDate } from '../utils/format';
+import { getAuthorizationCode } from '../utils/auth';
 
 function PostDetailPage() {
   const navigate = useNavigate();
@@ -20,7 +21,14 @@ function PostDetailPage() {
     navigate(generatePath(ROUTE_PATH.POST_EDIT, { postId: String(id) }));
   }
 
-    function handleDelete() {
+
+  function handleDelete() {
+    if (!getAuthorizationCode()) {
+      alert('회원 코드를 먼저 발급받아주세요.');
+      navigate(ROUTE_PATH.AUTH);
+      return;
+    }
+    
     if (!confirm('정말 삭제할까요?')) return;
 
     removePost(id, {
