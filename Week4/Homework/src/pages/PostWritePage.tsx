@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { ROUTE_PATH } from '../router/path';
 import { useCreatePost } from '../hooks/usePosts';
 
-const CONTENT_MAX_LENGTH = 1000
+const CONTENT_MAX_LENGTH = 1000;
 
 function PostWritePage() {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ function PostWritePage() {
       { title: title.trim(), content: content.trim(), author: author.trim() },
       {
         onSuccess: () => {
-          alert('게시글이 작성되었어요.');
+          alert(`${author.trim()}님의 게시글이 작성되었어요.`);
           navigate(ROUTE_PATH.POST_LIST);
         },
         onError: () => {
@@ -66,7 +66,6 @@ function PostWritePage() {
           <Counter>
             {content.length} / {CONTENT_MAX_LENGTH}
           </Counter>
-
         </Field>
 
         <Field>
