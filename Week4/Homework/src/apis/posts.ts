@@ -1,11 +1,19 @@
 import { api } from "./instance";
 import type { ApiResponse } from "../types/api";
-import type { GetPostsParams, PostListResponse } from "../types/post";
+import type { GetPostsParams, PostListResponse, CreatePostRequest, Post } from "../types/post";
 
 export async function getPosts({ keyword }: GetPostsParams) {
   const response = await api
     .get('posts', { searchParams: { keyword } })
     .json<ApiResponse<PostListResponse>>();
+
+  return response.data;
+}
+
+export async function createPost(body: CreatePostRequest) {
+  const response = await api
+    .post('posts', { json: body })
+    .json<ApiResponse<Post>>();
 
   return response.data;
 }
