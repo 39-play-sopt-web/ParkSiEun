@@ -33,3 +33,11 @@ export async function updatePost(postId: number, body: UpdatePostRequest) {
 
   return response.data;
 }
+
+export async function deletePost(postId: number) {
+  const response = await api
+    .delete(`posts/${postId}`)
+    .json<ApiResponse<string>>();
+
+  return response.data;
+}

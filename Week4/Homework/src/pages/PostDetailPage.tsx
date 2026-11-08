@@ -1,7 +1,7 @@
 import { useNavigate, useParams, generatePath } from 'react-router';
 import styled from '@emotion/styled';
 import { ROUTE_PATH } from '../router/path';
-import { usePostDetail } from '../hooks/usePosts';
+import { usePostDetail, useDeletePost } from '../hooks/usePosts';
 import { formatDate } from '../utils/format';
 
 function PostDetailPage() {
@@ -10,6 +10,7 @@ function PostDetailPage() {
   const id = Number(postId);
   const isValidId = Number.isInteger(id) && id > 0;
   const { data: post, isPending, isError } = usePostDetail(id);
+  const { mutate: removePost, isPending: isDeleting } = useDeletePost();
 
   function handleGoToList() {
     navigate(ROUTE_PATH.POST_LIST);
@@ -17,6 +18,20 @@ function PostDetailPage() {
 
   function handleGoToEdit() {
     navigate(generatePath(ROUTE_PATH.POST_EDIT, { postId: String(id) }));
+  }
+
+    function handleDelete() {
+    if (!confirm('정말 삭제할까요?')) return;
+
+    removePost(id, {
+      onSuccess: () => {
+        alert('게시글이 삭제되었어요.');
+        navigate(ROUTE_PATH.POST_LIST);
+      },
+      onError: () => {
+        alert('게시글 삭제에 실패했어요. 다시 시도해주세요.');
+      },
+    });
   }
 
   function renderPost() {
@@ -43,6 +58,9 @@ function PostDetailPage() {
           <EditButton type="button" onClick={handleGoToEdit}>
             수정
           </EditButton>
+          <DeleteButton type="button" onClick={handleDelete} disabled={isDeleting}>
+            {isDeleting ? '삭제 중...' : '삭제'}
+          </DeleteButton>
         </Buttons>
       </>
     );
@@ -131,5 +149,22 @@ const EditButton = styled.button`
 
   &:hover {
     border-color: ${({ theme }) => theme.colors.primary};
+  }
+`;
+
+const DeleteButton = styled.button`
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.textOnPrimary};
+  transition: background-color 0.2s;
+
+  &:hover:not(:disabled) {
+    background: ${({ theme }) => theme.colors.primaryHover};
+  }
+
+  &:disabled {
+    background: ${({ theme }) => theme.colors.disabled};
+    color: ${({ theme }) => theme.colors.disabledText};
   }
 `;
